@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Donors - BloodFinder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navbar -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-md fixed w-full z-20 top-0">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a href="index.html" class="text-red-500 font-bold text-2xl">🩸 BloodFinder</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="text-gray-700 hover:text-red-500">HOME</a>
+                <a href="donor.html" class="text-gray-700 hover:text-red-500">DONORS</a>
+                <a href="search.html" class="text-red-500 font-semibold">SEARCH</a>
+                <a href="admin.html" class="text-gray-700 hover:text-red-500">ADMIN</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white p-4">
+            <a href="index.html" class="block text-gray-700 hover:text-red-500 py-2">HOME</a>
+            <a href="donor.html" class="block text-gray-700 hover:text-red-500 py-2">DONORS</a>
+            <a href="search.html" class="block text-red-500 font-semibold py-2">SEARCH</a>
+            <a href="admin.html" class="block text-gray-700 hover:text-red-500 py-2">ADMIN</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-20 min-h-screen">
+        <div class="container mx-auto px-4 py-8">
+
+            <!-- Page Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Find Blood Donors</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Search for available blood donors in your area. In case of emergency, you can also submit an urgent request.
+                </p>
+            </div>
+
+            <!-- Search Section -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <div class="bg-white rounded-xl shadow-xl p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Search Donors</h2>
+                    
+                    <form id="searchForm" onsubmit="searchDonors(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <div>
+                                <label for="bloodGroup" class="block text-sm font-medium text-gray-700 mb-2">Blood Group</label>
+                                <select id="bloodGroup" name="bloodGroup" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200">
+                                    <option value="">Select Blood Group</option>
+                                    <option value="ALL" class="font-bold text-red-600">🩸 ALL BLOOD GROUPS</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="city" class="block text-sm font-medium text-gray-700 mb-2">City</label>
+                                <select id="city" name="city" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200">
+                                    <option value="">Select City</option>
+                                    
+                                    <!-- Kerala Cities (Priority) -->
+                                    <optgroup label="🌴 Kerala Cities">
+                                        <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                                        <option value="Kochi">Kochi (Ernakulam)</option>
+                                        <option value="Kozhikode">Kozhikode (Calicut)</option>
+                                        <option value="Kottayam">Kottayam</option>
+                                        <option value="Thrissur">Thrissur</option>
+                                        <option value="Alappuzha">Alappuzha (Alleppey)</option>
+                                        <option value="Kollam">Kollam (Quilon)</option>
+                                        <option value="Palakkad">Palakkad (Palghat)</option>
+                                        <option value="Kannur">Kannur</option>
+                                        <option value="Kasaragod">Kasaragod</option>
+                                        <option value="Wayanad">Wayanad</option>
+                                        <option value="Idukki">Idukki</option>
+                                        <option value="Pathanamthitta">Pathanamthitta</option>
+                                        <option value="Malappuram">Malappuram</option>
+                                        <option value="Aluva">Aluva</option>
+                                        <option value="Thodupuzha">Thodupuzha</option>
+                                        <option value="Perinthalmanna">Perinthalmanna</option>
+                                        <option value="Chalakudy">Chalakudy</option>
+                                        <option value="Changanassery">Changanassery</option>
+                                        <option value="Kayamkulam">Kayamkulam</option>
+                                        <option value="Nedumangad">Nedumangad</option>
+                                        <option value="Attingal">Attingal</option>
+                                        <option value="Munnar">Munnar</option>
+                                        <option value="Varkala">Varkala</option>
+                                        <option value="Cherthala">Cherthala</option>
+                                        <option value="Muvattupuzha">Muvattupuzha</option>
+                                        <option value="Vadakara">Vadakara</option>
+                                        <option value="Kanhangad">Kanhangad</option>
+                                        <option value="Taliparamba">Taliparamba</option>
+                                        <option value="Kondotty">Kondotty</option>
+                                    </optgroup>
+                                    
+                                    <!-- Major Indian Metro Cities -->
+                                    <optgroup label="🏙️ Major Metro Cities">
+                                        <option value="Mumbai">Mumbai</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Bangalore">Bangalore</option>
+                                        <option value="Hyderabad">Hyderabad</option>
+                                        <option value="Chennai">Chennai</option>
+                                        <option value="Kolkata">Kolkata</option>
+                                        <option value="Pune">Pune</option>
+                                        <option value="Ahmedabad">Ahmedabad</option>
+                                        <option value="Surat">Surat</option>
+                                        <option value="Jaipur">Jaipur</option>
+                                    </optgroup>
+                                    
+                                    <!-- North India -->
+                                    <optgroup label="🏔️ North India">
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Lucknow">Lucknow</option>
+                                        <option value="Kanpur">Kanpur</option>
+                                        <option value="Nagpur">Nagpur</option>
+                                        <option value="Indore">Indore</option>
+                                        <option value="Bhopal">Bhopal</option>
+                                        <option value="Gurgaon">Gurgaon</option>
+                                        <option value="Noida">Noida</option>
+                                        <option value="Faridabad">Faridabad</option>
+                                        <option value="Ghaziabad">Ghaziabad</option>
+                                        <option value="Agra">Agra</option>
+                                        <option value="Meerut">Meerut</option>
+                                        <option value="Varanasi">Varanasi</option>
+                                        <option value="Allahabad">Allahabad</option>
+                                        <option value="Amritsar">Amritsar</option>
+                                        <option value="Jalandhar">Jalandhar</option>
+                                        <option value="Ludhiana">Ludhiana</option>
+                                        <option value="Dehradun">Dehradun</option>
+                                        <option value="Haridwar">Haridwar</option>
+                                        <option value="Shimla">Shimla</option>
+                                        <option value="Jammu">Jammu</option>
+                                        <option value="Srinagar">Srinagar</option>
+                                    </optgroup>
+                                    
+                                    <!-- West India -->
+                                    <optgroup label="🌅 West India">
+                                        <option value="Nashik">Nashik</option>
+                                        <option value="Aurangabad">Aurangabad</option>
+                                        <option value="Kolhapur">Kolhapur</option>
+                                        <option value="Sangli">Sangli</option>
+                                        <option value="Solapur">Solapur</option>
+                                        <option value="Vadodara">Vadodara</option>
+                                        <option value="Rajkot">Rajkot</option>
+                                        <option value="Bhavnagar">Bhavnagar</option>
+                                        <option value="Jamnagar">Jamnagar</option>
+                                        <option value="Gandhinagar">Gandhinagar</option>
+                                        <option value="Anand">Anand</option>
+                                        <option value="Udaipur">Udaipur</option>
+                                        <option value="Jodhpur">Jodhpur</option>
+                                        <option value="Kota">Kota</option>
+                                        <option value="Ajmer">Ajmer</option>
+                                        <option value="Bikaner">Bikaner</option>
+                                        <option value="Goa">Goa</option>
+                                    </optgroup>
+                                    
+                                    <!-- South India -->
+                                    <optgroup label="🌺 South India">
+                                        <option value="Mysore">Mysore</option>
+                                        <option value="Mangalore">Mangalore</option>
+                                        <option value="Hubli">Hubli</option>
+                                        <option value="Belgaum">Belgaum</option>
+                                        <option value="Coimbatore">Coimbatore</option>
+                                        <option value="Madurai">Madurai</option>
+                                        <option value="Salem">Salem</option>
+                                        <option value="Tiruchirappalli">Tiruchirappalli</option>
+                                        <option value="Tirunelveli">Tirunelveli</option>
+                                        <option value="Vellore">Vellore</option>
+                                        <option value="Pondicherry">Pondicherry</option>
+                                        <option value="Visakhapatnam">Visakhapatnam</option>
+                                        <option value="Vijayawada">Vijayawada</option>
+                                        <option value="Guntur">Guntur</option>
+                                        <option value="Nellore">Nellore</option>
+                                        <option value="Tirupati">Tirupati</option>
+                                        <option value="Warangal">Warangal</option>
+                                        <option value="Karimnagar">Karimnagar</option>
+                                        <option value="Nizamabad">Nizamabad</option>
+                                    </optgroup>
+                                    
+                                    <!-- East India -->
+                                    <optgroup label="🌅 East India">
+                                        <option value="Bhubaneswar">Bhubaneswar</option>
+                                        <option value="Cuttack">Cuttack</option>
+                                        <option value="Rourkela">Rourkela</option>
+                                        <option value="Guwahati">Guwahati</option>
+                                        <option value="Silchar">Silchar</option>
+                                        <option value="Dibrugarh">Dibrugarh</option>
+                                        <option value="Shillong">Shillong</option>
+                                        <option value="Imphal">Imphal</option>
+                                        <option value="Aizawl">Aizawl</option>
+                                        <option value="Agartala">Agartala</option>
+                                        <option value="Kohima">Kohima</option>
+                                        <option value="Itanagar">Itanagar</option>
+                                        <option value="Gangtok">Gangtok</option>
+                                        <option value="Siliguri">Siliguri</option>
+                                        <option value="Durgapur">Durgapur</option>
+                                        <option value="Asansol">Asansol</option>
+                                        <option value="Ranchi">Ranchi</option>
+                                        <option value="Jamshedpur">Jamshedpur</option>
+                                        <option value="Dhanbad">Dhanbad</option>
+                                        <option value="Patna">Patna</option>
+                                        <option value="Gaya">Gaya</option>
+                                        <option value="Muzaffarpur">Muzaffarpur</option>
+                                        <option value="Purnia">Purnia</option>
+                                    </optgroup>
+                                    
+                                    <!-- Central India -->
+                                    <optgroup label="🏞️ Central India">
+                                        <option value="Raipur">Raipur</option>
+                                        <option value="Bilaspur">Bilaspur</option>
+                                        <option value="Jabalpur">Jabalpur</option>
+                                        <option value="Gwalior">Gwalior</option>
+                                        <option value="Ujjain">Ujjain</option>
+                                        <option value="Dewas">Dewas</option>
+                                        <option value="Sagar">Sagar</option>
+                                        <option value="Ratlam">Ratlam</option>
+                                        <option value="Satna">Satna</option>
+                                        <option value="Murwara">Murwara</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button type="submit"
+                                    class="w-full bg-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-600 transition duration-200 transform hover:scale-105">
+                                    Search Donors
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div id="searchResults" class="max-w-6xl mx-auto mb-12 hidden">
+                <div class="bg-white rounded-xl shadow-xl p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Available Donors</h2>
+                    <div id="donorsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Donor cards will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Request Section -->
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-red-50 border border-red-200 rounded-xl shadow-xl p-8">
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl font-bold text-red-800 mb-2">Emergency Blood Request</h2>
+                        <p class="text-red-700">Submit an urgent request to notify all matching donors in your area</p>
+                    </div>
+
+                    <form id="emergencyForm" onsubmit="submitEmergencyRequest(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="patientName" class="block text-sm font-medium text-gray-700 mb-2">Patient Name</label>
+                                <input type="text" id="patientName" name="patientName" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200">
+                            </div>
+                            <div>
+                                <label for="emergencyBloodGroup" class="block text-sm font-medium text-gray-700 mb-2">Blood Group Needed</label>
+                                <select id="emergencyBloodGroup" name="bloodGroup" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200">
+                                    <option value="">Select Blood Group</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="hospital" class="block text-sm font-medium text-gray-700 mb-2">Hospital Name</label>
+                                <input type="text" id="hospital" name="hospital" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200">
+                            </div>
+                            <div>
+                                <label for="contactNumber" class="block text-sm font-medium text-gray-700 mb-2">Contact Number</label>
+                                <input type="tel" id="contactNumber" name="contactNumber" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="requestCity" class="block text-sm font-medium text-gray-700 mb-2">City</label>
+                                <select id="requestCity" name="city" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200">
+                                    <option value="">Select City</option>
+                                    
+                                    <!-- Kerala Cities (Priority) -->
+                                    <optgroup label="🌴 Kerala Cities">
+                                        <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                                        <option value="Kochi">Kochi (Ernakulam)</option>
+                                        <option value="Kozhikode">Kozhikode (Calicut)</option>
+                                        <option value="Kottayam">Kottayam</option>
+                                        <option value="Thrissur">Thrissur</option>
+                                        <option value="Alappuzha">Alappuzha (Alleppey)</option>
+                                        <option value="Kollam">Kollam (Quilon)</option>
+                                        <option value="Palakkad">Palakkad (Palghat)</option>
+                                        <option value="Kannur">Kannur</option>
+                                        <option value="Kasaragod">Kasaragod</option>
+                                        <option value="Wayanad">Wayanad</option>
+                                        <option value="Idukki">Idukki</option>
+                                        <option value="Pathanamthitta">Pathanamthitta</option>
+                                        <option value="Malappuram">Malappuram</option>
+                                        <option value="Aluva">Aluva</option>
+                                        <option value="Thodupuzha">Thodupuzha</option>
+                                        <option value="Perinthalmanna">Perinthalmanna</option>
+                                        <option value="Chalakudy">Chalakudy</option>
+                                        <option value="Changanassery">Changanassery</option>
+                                        <option value="Kayamkulam">Kayamkulam</option>
+                                        <option value="Nedumangad">Nedumangad</option>
+                                        <option value="Attingal">Attingal</option>
+                                        <option value="Munnar">Munnar</option>
+                                        <option value="Varkala">Varkala</option>
+                                        <option value="Cherthala">Cherthala</option>
+                                        <option value="Muvattupuzha">Muvattupuzha</option>
+                                        <option value="Vadakara">Vadakara</option>
+                                        <option value="Kanhangad">Kanhangad</option>
+                                        <option value="Taliparamba">Taliparamba</option>
+                                        <option value="Kondotty">Kondotty</option>
+                                    </optgroup>
+                                    
+                                    <!-- Major Indian Metro Cities -->
+                                    <optgroup label="🏙️ Major Metro Cities">
+                                        <option value="Mumbai">Mumbai</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Bangalore">Bangalore</option>
+                                        <option value="Hyderabad">Hyderabad</option>
+                                        <option value="Chennai">Chennai</option>
+                                        <option value="Kolkata">Kolkata</option>
+                                        <option value="Pune">Pune</option>
+                                        <option value="Ahmedabad">Ahmedabad</option>
+                                        <option value="Surat">Surat</option>
+                                        <option value="Jaipur">Jaipur</option>
+                                    </optgroup>
+                                    
+                                    <!-- North India -->
+                                    <optgroup label="🏔️ North India">
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Lucknow">Lucknow</option>
+                                        <option value="Kanpur">Kanpur</option>
+                                        <option value="Nagpur">Nagpur</option>
+                                        <option value="Indore">Indore</option>
+                                        <option value="Bhopal">Bhopal</option>
+                                        <option value="Gurgaon">Gurgaon</option>
+                                        <option value="Noida">Noida</option>
+                                        <option value="Faridabad">Faridabad</option>
+                                        <option value="Ghaziabad">Ghaziabad</option>
+                                        <option value="Agra">Agra</option>
+                                        <option value="Meerut">Meerut</option>
+                                        <option value="Varanasi">Varanasi</option>
+                                        <option value="Allahabad">Allahabad</option>
+                                        <option value="Amritsar">Amritsar</option>
+                                        <option value="Jalandhar">Jalandhar</option>
+                                        <option value="Ludhiana">Ludhiana</option>
+                                        <option value="Dehradun">Dehradun</option>
+                                        <option value="Haridwar">Haridwar</option>
+                                        <option value="Shimla">Shimla</option>
+                                        <option value="Jammu">Jammu</option>
+                                        <option value="Srinagar">Srinagar</option>
+                                    </optgroup>
+                                    
+                                    <!-- West India -->
+                                    <optgroup label="🌅 West India">
+                                        <option value="Nashik">Nashik</option>
+                                        <option value="Aurangabad">Aurangabad</option>
+                                        <option value="Kolhapur">Kolhapur</option>
+                                        <option value="Sangli">Sangli</option>
+                                        <option value="Solapur">Solapur</option>
+                                        <option value="Vadodara">Vadodara</option>
+                                        <option value="Rajkot">Rajkot</option>
+                                        <option value="Bhavnagar">Bhavnagar</option>
+                                        <option value="Jamnagar">Jamnagar</option>
+                                        <option value="Gandhinagar">Gandhinagar</option>
+                                        <option value="Anand">Anand</option>
+                                        <option value="Udaipur">Udaipur</option>
+                                        <option value="Jodhpur">Jodhpur</option>
+                                        <option value="Kota">Kota</option>
+                                        <option value="Ajmer">Ajmer</option>
+                                        <option value="Bikaner">Bikaner</option>
+                                        <option value="Goa">Goa</option>
+                                    </optgroup>
+                                    
+                                    <!-- South India -->
+                                    <optgroup label="🌺 South India">
+                                        <option value="Mysore">Mysore</option>
+                                        <option value="Mangalore">Mangalore</option>
+                                        <option value="Hubli">Hubli</option>
+                                        <option value="Belgaum">Belgaum</option>
+                                        <option value="Coimbatore">Coimbatore</option>
+                                        <option value="Madurai">Madurai</option>
+                                        <option value="Salem">Salem</option>
+                                        <option value="Tiruchirappalli">Tiruchirappalli</option>
+                                        <option value="Tirunelveli">Tirunelveli</option>
+                                        <option value="Vellore">Vellore</option>
+                                        <option value="Pondicherry">Pondicherry</option>
+                                        <option value="Visakhapatnam">Visakhapatnam</option>
+                                        <option value="Vijayawada">Vijayawada</option>
+                                        <option value="Guntur">Guntur</option>
+                                        <option value="Nellore">Nellore</option>
+                                        <option value="Tirupati">Tirupati</option>
+                                        <option value="Warangal">Warangal</option>
+                                        <option value="Karimnagar">Karimnagar</option>
+                                        <option value="Nizamabad">Nizamabad</option>
+                                    </optgroup>
+                                    
+                                    <!-- East India -->
+                                    <optgroup label="🌅 East India">
+                                        <option value="Bhubaneswar">Bhubaneswar</option>
+                                        <option value="Cuttack">Cuttack</option>
+                                        <option value="Rourkela">Rourkela</option>
+                                        <option value="Guwahati">Guwahati</option>
+                                        <option value="Silchar">Silchar</option>
+                                        <option value="Dibrugarh">Dibrugarh</option>
+                                        <option value="Shillong">Shillong</option>
+                                        <option value="Imphal">Imphal</option>
+                                        <option value="Aizawl">Aizawl</option>
+                                        <option value="Agartala">Agartala</option>
+                                        <option value="Kohima">Kohima</option>
+                                        <option value="Itanagar">Itanagar</option>
+                                        <option value="Gangtok">Gangtok</option>
+                                        <option value="Siliguri">Siliguri</option>
+                                        <option value="Durgapur">Durgapur</option>
+                                        <option value="Asansol">Asansol</option>
+                                        <option value="Ranchi">Ranchi</option>
+                                        <option value="Jamshedpur">Jamshedpur</option>
+                                        <option value="Dhanbad">Dhanbad</option>
+                                        <option value="Patna">Patna</option>
+                                        <option value="Gaya">Gaya</option>
+                                        <option value="Muzaffarpur">Muzaffarpur</option>
+                                        <option value="Purnia">Purnia</option>
+                                    </optgroup>
+                                    
+                                    <!-- Central India -->
+                                    <optgroup label="🏞️ Central India">
+                                        <option value="Raipur">Raipur</option>
+                                        <option value="Bilaspur">Bilaspur</option>
+                                        <option value="Jabalpur">Jabalpur</option>
+                                        <option value="Gwalior">Gwalior</option>
+                                        <option value="Ujjain">Ujjain</option>
+                                        <option value="Dewas">Dewas</option>
+                                        <option value="Sagar">Sagar</option>
+                                        <option value="Ratlam">Ratlam</option>
+                                        <option value="Satna">Satna</option>
+                                        <option value="Murwara">Murwara</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="urgencyLevel" class="block text-sm font-medium text-gray-700 mb-2">Urgency Level</label>
+                                <select id="urgencyLevel" name="urgencyLevel" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200">
+                                    <option value="">Select Urgency</option>
+                                    <option value="critical">Critical (Immediate)</option>
+                                    <option value="high">High (Within 2 hours)</option>
+                                    <option value="medium">Medium (Within 6 hours)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="additionalNotes" class="block text-sm font-medium text-gray-700 mb-2">Additional Notes (Optional)</label>
+                            <textarea id="additionalNotes" name="additionalNotes" rows="3"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
+                                placeholder="Any additional information..."></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit"
+                                class="bg-red-600 text-white py-4 px-8 rounded-lg font-bold text-lg hover:bg-red-700 transition duration-200 transform hover:scale-105">
+                                Submit Emergency Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.className = `fixed top-20 right-4 px-6 py-3 rounded-lg shadow-lg transform transition-transform duration-300 z-50 ${
+                type === 'success' ? 'bg-green-500' : 'bg-red-500'
+            } text-white`;
+            
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        // Search donors function
+        async function searchDonors(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const searchParams = Object.fromEntries(formData);
+            
+            console.log('🔍 Original search params:', searchParams);
+            
+            // Store original blood group for display
+            const originalBloodGroup = searchParams.bloodGroup;
+            
+            // Handle "ALL" blood group option
+            if (searchParams.bloodGroup === 'ALL') {
+                delete searchParams.bloodGroup; // Remove bloodGroup parameter to get all donors
+                console.log('🩸 Removed bloodGroup for ALL search');
+            }
+            
+            console.log('🔍 Final search params:', searchParams);
+            
+            try {
+                const queryString = new URLSearchParams(searchParams).toString();
+                console.log('🔍 Query string:', queryString);
+                const url = `/api/donor/search?${queryString}`;
+                console.log('🔍 Full URL:', url);
+                
+                const response = await fetch(url);
+                
+                if (response.ok) {
+                    const donors = await response.json();
+                    console.log('✅ Received donors:', donors.length);
+                    displaySearchResults(donors, originalBloodGroup);
+                } else {
+                    console.error('❌ Search failed with status:', response.status);
+                    showToast('Search failed. Please try again.', 'error');
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                showToast('Search failed. Please try again.', 'error');
+            }
+        }
+
+        // Display search results
+        function displaySearchResults(donors, searchedBloodGroup = '') {
+            const resultsSection = document.getElementById('searchResults');
+            const donorsList = document.getElementById('donorsList');
+            
+            resultsSection.classList.remove('hidden');
+            
+            // Update results header based on search type
+            const resultsHeader = resultsSection.querySelector('h2');
+            if (searchedBloodGroup === 'ALL') {
+                resultsHeader.textContent = `All Available Donors (${donors.length} found)`;
+                resultsHeader.className = 'text-2xl font-bold text-red-600 mb-6';
+            } else if (searchedBloodGroup) {
+                resultsHeader.textContent = `${searchedBloodGroup} Donors (${donors.length} found)`;
+                resultsHeader.className = 'text-2xl font-bold text-gray-900 mb-6';
+            } else {
+                resultsHeader.textContent = `Available Donors (${donors.length} found)`;
+                resultsHeader.className = 'text-2xl font-bold text-gray-900 mb-6';
+            }
+            
+            if (donors.length === 0) {
+                donorsList.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-gray-400 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-600 mb-2">No Donors Found</h3>
+                        <p class="text-gray-500">No available donors found matching your criteria. Try submitting an emergency request below.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            donorsList.innerHTML = donors.map(donor => `
+                <div class="bg-gray-50 rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">${donor.firstName} ${donor.lastName}</h3>
+                            <p class="text-gray-600">${donor.city}</p>
+                        </div>
+                        <span class="text-2xl font-bold text-red-600">${donor.bloodGroup}</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            ${donor.phone}
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            ${donor.address}
+                        </div>
+                        ${donor.totalDonations ? `
+                        <div class="flex items-center text-green-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            ${donor.totalDonations} donations completed
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            donor.isAvailable ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                        }">
+                            ${donor.isAvailable ? 'Available' : 'Not Available'}
+                        </span>
+                        <button onclick="contactDonor('${donor.phone}')" 
+                            class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600 transition duration-200">
+                            Contact
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Contact donor function
+        function contactDonor(phone) {
+            window.open(`tel:${phone}`, '_self');
+        }
+
+        // Submit emergency request
+        async function submitEmergencyRequest(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const requestData = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch('/api/emergency/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showToast('Emergency request submitted successfully!');
+                    event.target.reset();
+                } else {
+                    showToast(data.message || 'Failed to submit request', 'error');
+                }
+            } catch (error) {
+                console.error('Emergency request error:', error);
+                showToast('Failed to submit request. Please try again.', 'error');
+            }
+        }
+    </script>
+
+</body>
+</html>
