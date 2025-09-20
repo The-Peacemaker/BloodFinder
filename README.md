@@ -216,13 +216,6 @@ GET  /api/admin/users        # Manage users
 
 MIT License - This project is open source and available under the [MIT License](LICENSE).
 
-## 👥 Contributors
-
-**Team BloodFinder**
-- Acsa John (VJC23CS009)
-- Ashna Paul (VJC23CS050)
-- Aysha Lina Raihas (VJC23CS059)
-- Benedict Chacko Mathew (VJC23CS062)
 
 ## 🆘 Support & Issues
 
@@ -237,5 +230,6 @@ MIT License - This project is open source and available under the [MIT License](
 ---
 
 **💝 Built with love to save lives through technology**
+
 
 **🚀 Ready to deploy? Click the deploy buttons above!**
