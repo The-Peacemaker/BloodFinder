@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Feedback - BloodFinder</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩸</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-red-50 to-pink-50">
+
+    <!-- Navbar -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-md fixed w-full z-20 top-0">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a href="index.html" class="text-red-500 font-bold text-2xl">🩸 BloodFinder</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="text-gray-700 hover:text-red-500">HOME</a>
+                <a href="search.html" class="text-gray-700 hover:text-red-500">SEARCH</a>
+                <a href="inventory.html" class="text-gray-700 hover:text-red-500">INVENTORY</a>
+                <a href="public-feedback.html" class="text-red-500 font-semibold">FEEDBACK</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white p-4">
+            <a href="index.html" class="block text-gray-700 hover:text-red-500 py-2">HOME</a>
+            <a href="search.html" class="block text-gray-700 hover:text-red-500 py-2">SEARCH</a>
+            <a href="inventory.html" class="block text-gray-700 hover:text-red-500 py-2">INVENTORY</a>
+            <a href="public-feedback.html" class="block text-red-500 font-semibold py-2">FEEDBACK</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-20 min-h-screen">
+        <div class="container mx-auto px-4 py-12">
+
+            <!-- Hero Section -->
+            <div class="text-center mb-12 animate-fade-in-down">
+                <h1 class="text-5xl font-bold text-gray-900 mb-4">💬 Share Your Feedback</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Your voice matters! Help us improve our platform or share your experience with a donor.
+                    <span class="block mt-2 text-red-600 font-semibold">No login required - anyone can submit feedback!</span>
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Feedback Type Selection -->
+                <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8 animate-fade-in-up">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">What would you like to give feedback about?</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <button onclick="selectFeedbackType('app')" id="appFeedbackBtn"
+                            class="feedback-type-btn p-8 border-4 border-red-500 bg-red-50 rounded-xl hover:shadow-xl transition duration-300 transform hover:scale-105">
+                            <div class="text-6xl mb-4">🩸</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">BloodFinder Platform</h3>
+                            <p class="text-gray-600">Share your experience with our app, features, and services</p>
+                        </button>
+                        
+                        <button onclick="selectFeedbackType('donor')" id="donorFeedbackBtn"
+                            class="feedback-type-btn p-8 border-4 border-gray-300 bg-gray-50 rounded-xl hover:shadow-xl transition duration-300 transform hover:scale-105">
+                            <div class="text-6xl mb-4">👤</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Specific Donor</h3>
+                            <p class="text-gray-600">Rate and review your experience with a blood donor</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Feedback Form -->
+                <div class="bg-white rounded-2xl shadow-2xl p-8 animate-fade-in-up">
+                    <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)">
+                        
+                        <!-- Personal Info Section -->
+                        <div class="mb-8 pb-8 border-b border-gray-200">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">📝 Your Information</h3>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="userName" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Your Name *
+                                    </label>
+                                    <input type="text" id="userName" name="userName" required 
+                                        placeholder="Enter your name"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                                </div>
+
+                                <div>
+                                    <label for="userEmail" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Your Email *
+                                    </label>
+                                    <input type="email" id="userEmail" name="userEmail" required 
+                                        placeholder="your.email@example.com"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" id="isAnonymous" name="isAnonymous"
+                                        class="w-5 h-5 text-red-600 border-gray-300 rounded focus:ring-red-500">
+                                    <span class="text-gray-700">
+                                        Submit anonymously 
+                                        <span class="text-sm text-gray-500">(Your name won't be displayed publicly)</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Donor Selection (Hidden by default) -->
+                        <div id="donorSelectionSection" class="mb-8 pb-8 border-b border-gray-200 hidden">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">👤 Select Donor</h3>
+                            
+                            <div class="mb-4">
+                                <label for="donorSearch" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Search Donor by Name or Blood Group
+                                </label>
+                                <input type="text" id="donorSearch" placeholder="Type to search..."
+                                    oninput="filterDonors()"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                            </div>
+
+                            <div id="donorsList" class="max-h-64 overflow-y-auto space-y-2">
+                                <!-- Donors will be loaded here -->
+                            </div>
+                            
+                            <input type="hidden" id="selectedDonorId" name="donorId">
+                            <div id="selectedDonorDisplay" class="hidden mt-4 p-4 bg-green-50 border-2 border-green-500 rounded-lg">
+                                <p class="text-sm font-medium text-green-900 mb-1">Selected Donor:</p>
+                                <p id="selectedDonorName" class="text-lg font-bold text-gray-900"></p>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Details Section -->
+                        <div class="mb-8 pb-8 border-b border-gray-200">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">⭐ Your Feedback</h3>
+
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <!-- Rating -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Rating *</label>
+                                    <div class="flex items-center space-x-2" id="ratingStars">
+                                        <button type="button" class="star-btn text-5xl text-gray-300 hover:text-yellow-500 focus:outline-none transition-colors" data-rating="1">★</button>
+                                        <button type="button" class="star-btn text-5xl text-gray-300 hover:text-yellow-500 focus:outline-none transition-colors" data-rating="2">★</button>
+                                        <button type="button" class="star-btn text-5xl text-gray-300 hover:text-yellow-500 focus:outline-none transition-colors" data-rating="3">★</button>
+                                        <button type="button" class="star-btn text-5xl text-gray-300 hover:text-yellow-500 focus:outline-none transition-colors" data-rating="4">★</button>
+                                        <button type="button" class="star-btn text-5xl text-gray-300 hover:text-yellow-500 focus:outline-none transition-colors" data-rating="5">★</button>
+                                    </div>
+                                    <input type="hidden" id="rating" name="rating" required>
+                                    <p class="text-sm text-gray-500 mt-2" id="ratingText">Click stars to rate</p>
+                                </div>
+
+                                <!-- Category -->
+                                <div>
+                                    <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category *</label>
+                                    <select id="category" name="category" required 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                                        <option value="">Select a category</option>
+                                        <option value="platform">Platform Features</option>
+                                        <option value="experience">Overall Experience</option>
+                                        <option value="suggestion">Suggestions</option>
+                                        <option value="complaint">Complaint</option>
+                                        <option value="donor-feedback">Donor Experience</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Subject -->
+                            <div class="mb-6">
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject *</label>
+                                <input type="text" id="subject" name="subject" required 
+                                    placeholder="Brief subject of your feedback"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                            </div>
+
+                            <!-- Message -->
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Your Feedback *</label>
+                                <textarea id="message" name="message" rows="6" required 
+                                    placeholder="Share your detailed thoughts, experience, or suggestions..."
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"></textarea>
+                                <p class="text-sm text-gray-500 mt-2">Please be respectful and constructive in your feedback.</p>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex justify-center">
+                            <button type="submit" 
+                                class="bg-gradient-to-r from-red-600 to-pink-600 text-white px-12 py-4 rounded-full font-bold text-lg hover:from-red-700 hover:to-pink-700 transition duration-200 transform hover:scale-105 shadow-lg">
+                                Submit Feedback
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Why Feedback Matters -->
+                <div class="mt-12 bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-blue-900 mb-2">Why Your Feedback Matters</h3>
+                    <ul class="space-y-2 text-blue-800">
+                        <li>✓ Helps us improve our platform and services</li>
+                        <li>✓ Recognizes and encourages dedicated donors</li>
+                        <li>✓ Builds trust in the blood donation community</li>
+                        <li>✓ Your input shapes the future of BloodFinder</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md mx-4 animate-fade-in-up">
+            <div class="text-center">
+                <div class="text-6xl mb-4">✅</div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
+                <p class="text-gray-600 mb-6">Your feedback has been submitted successfully. We truly appreciate your input!</p>
+                <button onclick="closeModal()" 
+                    class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 BloodFinder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentRating = 0;
+        let feedbackType = 'app';
+        let allDonors = [];
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.className = `fixed top-20 right-4 px-6 py-3 rounded-lg shadow-lg transform transition-transform duration-300 z-50 ${
+                type === 'success' ? 'bg-green-500' : 'bg-red-500'
+            } text-white`;
+            
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        // Select feedback type
+        function selectFeedbackType(type) {
+            feedbackType = type;
+            
+            const appBtn = document.getElementById('appFeedbackBtn');
+            const donorBtn = document.getElementById('donorFeedbackBtn');
+            const donorSection = document.getElementById('donorSelectionSection');
+            
+            if (type === 'app') {
+                appBtn.classList.remove('border-gray-300', 'bg-gray-50');
+                appBtn.classList.add('border-red-500', 'bg-red-50');
+                donorBtn.classList.remove('border-red-500', 'bg-red-50');
+                donorBtn.classList.add('border-gray-300', 'bg-gray-50');
+                donorSection.classList.add('hidden');
+            } else {
+                donorBtn.classList.remove('border-gray-300', 'bg-gray-50');
+                donorBtn.classList.add('border-red-500', 'bg-red-50');
+                appBtn.classList.remove('border-red-500', 'bg-red-50');
+                appBtn.classList.add('border-gray-300', 'bg-gray-50');
+                donorSection.classList.remove('hidden');
+                loadDonors();
+            }
+        }
+
+        // Load donors list
+        async function loadDonors() {
+            try {
+                const response = await fetch('/api/feedback/donors-list');
+                if (response.ok) {
+                    allDonors = await response.json();
+                    displayDonors(allDonors);
+                }
+            } catch (error) {
+                console.error('Load donors error:', error);
+                showToast('Failed to load donors list', 'error');
+            }
+        }
+
+        // Display donors
+        function displayDonors(donors) {
+            const container = document.getElementById('donorsList');
+            
+            if (donors.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center py-4">No donors found</p>';
+                return;
+            }
+            
+            container.innerHTML = donors.map(donor => `
+                <div onclick="selectDonor('${donor._id}', '${donor.firstName} ${donor.lastName}', '${donor.bloodGroup}')" 
+                    class="donor-item p-4 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-500 cursor-pointer transition">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="font-semibold text-gray-900">${donor.firstName} ${donor.lastName}</p>
+                            <p class="text-sm text-gray-600">${donor.city} • ${donor.totalDonations} donations</p>
+                        </div>
+                        <span class="inline-block px-3 py-1 rounded-full text-sm font-bold bg-red-100 text-red-600">
+                            ${donor.bloodGroup}
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter donors
+        function filterDonors() {
+            const searchTerm = document.getElementById('donorSearch').value.toLowerCase();
+            const filtered = allDonors.filter(donor => 
+                `${donor.firstName} ${donor.lastName}`.toLowerCase().includes(searchTerm) ||
+                donor.bloodGroup.toLowerCase().includes(searchTerm) ||
+                donor.city.toLowerCase().includes(searchTerm)
+            );
+            displayDonors(filtered);
+        }
+
+        // Select donor
+        function selectDonor(donorId, donorName, bloodGroup) {
+            document.getElementById('selectedDonorId').value = donorId;
+            document.getElementById('selectedDonorName').textContent = `${donorName} (${bloodGroup})`;
+            document.getElementById('selectedDonorDisplay').classList.remove('hidden');
+            
+            // Highlight selected donor
+            document.querySelectorAll('.donor-item').forEach(item => {
+                item.classList.remove('bg-red-50', 'border-red-500');
+            });
+            event.currentTarget.classList.add('bg-red-50', 'border-red-500');
+            
+            showToast('Donor selected!');
+        }
+
+        // Rating stars functionality
+        document.querySelectorAll('.star-btn').forEach(star => {
+            star.addEventListener('click', function() {
+                currentRating = parseInt(this.getAttribute('data-rating'));
+                document.getElementById('rating').value = currentRating;
+                
+                // Update star colors
+                document.querySelectorAll('.star-btn').forEach((s, index) => {
+                    if (index < currentRating) {
+                        s.classList.remove('text-gray-300');
+                        s.classList.add('text-yellow-500');
+                    } else {
+                        s.classList.remove('text-yellow-500');
+                        s.classList.add('text-gray-300');
+                    }
+                });
+
+                // Update rating text
+                const ratingTexts = ['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+                document.getElementById('ratingText').textContent = ratingTexts[currentRating];
+            });
+        });
+
+        // Handle feedback submission
+        async function handleFeedbackSubmit(event) {
+            event.preventDefault();
+            
+            if (currentRating === 0) {
+                showToast('Please select a rating', 'error');
+                return;
+            }
+
+            if (feedbackType === 'donor' && !document.getElementById('selectedDonorId').value) {
+                showToast('Please select a donor', 'error');
+                return;
+            }
+
+            const formData = {
+                userName: document.getElementById('userName').value,
+                userEmail: document.getElementById('userEmail').value,
+                rating: currentRating,
+                category: document.getElementById('category').value,
+                feedbackType: feedbackType,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                isAnonymous: document.getElementById('isAnonymous').checked
+            };
+
+            if (feedbackType === 'donor') {
+                formData.donorId = document.getElementById('selectedDonorId').value;
+            }
+
+            try {
+                const response = await fetch('/api/feedback/public-submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('successModal').classList.remove('hidden');
+                    document.getElementById('feedbackForm').reset();
+                    currentRating = 0;
+                    document.querySelectorAll('.star-btn').forEach(s => {
+                        s.classList.remove('text-yellow-500');
+                        s.classList.add('text-gray-300');
+                    });
+                    document.getElementById('ratingText').textContent = 'Click stars to rate';
+                } else {
+                    showToast(data.message || 'Failed to submit feedback', 'error');
+                }
+            } catch (error) {
+                console.error('Submit feedback error:', error);
+                showToast('Failed to submit feedback. Please try again.', 'error');
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            window.location.reload();
+        }
+    </script>
+
+</body>
+</html>
