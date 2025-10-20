@@ -404,46 +404,6 @@ This project showcases comprehensive database management concepts:
    - Many-to-One (Feedback → User)
    - Reference-based relationships
 
----
-
-## 🌐 Deployment
-
-### Vercel Deployment (Recommended)
-
-1. Install Vercel CLI:
-```bash
-npm i -g vercel
-```
-
-2. Deploy:
-```bash
-vercel
-```
-
-3. Add environment variables in Vercel dashboard:
-   - `MONGODB_URI`
-   - `JWT_SECRET`
-
-### MongoDB Atlas Setup
-
-1. Create account at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-2. Create a new cluster
-3. Get connection string
-4. Update `.env` file with Atlas URI
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
 
 ## 📝 Scripts
 
@@ -484,60 +444,11 @@ lsof -ti:3001 | xargs kill -9
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
 
-## 👨‍💻 Author
-
-**BloodFinder Team**
-
----
-
-## 🙏 Acknowledgments
-
-- Inspired by real-world blood donation challenges in India
-- Built with ❤️ for saving lives
-- Thanks to the open-source community
-
----
-
-## 📧 Contact
-
-For issues, questions, or suggestions:
-- Open an issue on GitHub
-- Email: support@bloodfinder.example
-
----
 
 ## ⭐ Show Your Support
 
 Give a ⭐️ if this project helped you!
 
 
-
-## 📸 Screenshots
-
-### Admin Analytics Dashboard
-![Analytics Dashboard](https://via.placeholder.com/800x400?text=Analytics+Dashboard+with+5+Charts)
-
-### Donor Portal
-![Donor Portal](https://via.placeholder.com/800x400?text=Donor+Portal+with+History)
-
-### Public Feedback
-![Public Feedback](https://via.placeholder.com/800x400?text=Public+Feedback+System)
-
----
-
-## 🚀 Future Enhancements
-
-- [ ] Mobile application (React Native)
-- [ ] SMS notifications
-- [ ] Email integration
-- [ ] Blood donation camps management
-- [ ] Donor rewards/badges system
-- [ ] Advanced matching algorithm
-- [ ] Multi-language support
-- [ ] Geolocation-based search
-
----
-
-**Built With ❤️ By Benedict** 🩸❤️
+**Built With ❤️ By Benedict**
