@@ -512,11 +512,7 @@ For issues, questions, or suggestions:
 
 Give a ⭐️ if this project helped you!
 
----
 
-**🩸 Remember: Every drop counts. Be a hero, donate blood! 🩸**
-
----
 
 ## 📸 Screenshots
 
@@ -544,4 +540,4 @@ Give a ⭐️ if this project helped you!
 
 ---
 
-**Built with passion to save lives** 🩸❤️
+**Built With ❤️ By Benedict** 🩸❤️

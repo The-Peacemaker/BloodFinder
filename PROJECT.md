@@ -32,7 +32,6 @@ BloodFinder/
 │   ├── donor.html         # Donor portal
 │   ├── search.html        # Public donor search
 │   ├── public-feedback.html  # Public feedback (no login)
-│   ├── feedback.html      # Feedback management
 │   ├── inventory.html     # Blood inventory
 │   └── style.css          # Custom styles
 │
